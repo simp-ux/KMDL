@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story Begins</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap');
+
+        :root {
+            --bg-top: #ffd7ea;
+            --bg-mid: #fff2c9;
+            --bg-bottom: #d3f3ff;
+            --ink: #3b2554;
+            --card: rgba(255, 255, 255, 0.78);
+            --pink: #ff5fa2;
+            --berry: #c94a8f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--ink);
+            background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
+            overflow-x: hidden;
+        }
+
+        .sparkles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.8) 0 2px, transparent 3px),
+                radial-gradient(circle at 75% 30%, rgba(255, 255, 255, 0.7) 0 2px, transparent 3px),
+                radial-gradient(circle at 45% 75%, rgba(255, 255, 255, 0.9) 0 2px, transparent 3px),
+                radial-gradient(circle at 85% 80%, rgba(255, 255, 255, 0.75) 0 2px, transparent 3px);
+            background-size: 420px 420px;
+            animation: twinkle 8s linear infinite;
+        }
+
+        @keyframes twinkle {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-card {
+            width: min(900px, 92vw);
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            border-radius: 28px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 24px 65px rgba(61, 30, 97, 0.2);
+            text-align: center;
+            padding: 48px 30px;
+            animation: popIn 0.7s ease-out;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 999px;
+            background: #fff;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 18px;
+            color: var(--berry);
+        }
+
+        h1 {
+            font-family: 'Baloo 2', cursive;
+            font-size: clamp(2rem, 7vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            margin-bottom: 18px;
+        }
+
+        .hint {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: translateY(24px) scale(0.97);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .story {
+            position: relative;
+            z-index: 2;
+            width: min(1080px, 92vw);
+            margin: 0 auto 120px;
+            display: grid;
+            gap: 28px;
+        }
+
+        .story-section {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 24px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 18px 42px rgba(43, 22, 68, 0.14);
+            transform: translateY(26px);
+            opacity: 0;
+            transition: transform 0.65s ease, opacity 0.65s ease;
+        }
+
+        .story-section.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .story-section.reverse {
+            grid-template-columns: 1fr 1.1fr;
+        }
+
+        .story-image {
+            height: 100%;
+            min-height: 300px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .story-copy {
+            padding: 30px;
+        }
+
+        .story-copy h2 {
+            font-family: 'Baloo 2', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            margin-bottom: 10px;
+            color: #4b2d72;
+        }
+
+        .story-copy p {
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .final-note {
+            width: min(900px, 92vw);
+            margin: 0 auto 90px;
+            text-align: center;
+            background: linear-gradient(140deg, rgba(255, 95, 162, 0.18), rgba(201, 74, 143, 0.16));
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 26px;
+            padding: 44px 26px;
+            box-shadow: 0 20px 48px rgba(59, 37, 84, 0.16);
+            z-index: 2;
+            position: relative;
+        }
+
+        .final-note h3 {
+            font-family: 'Baloo 2', cursive;
+            font-size: clamp(1.7rem, 5vw, 2.8rem);
+            margin-bottom: 10px;
+        }
+
+        .final-note p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 22px;
+            text-decoration: none;
+            font-weight: 800;
+            color: #fff;
+            background: linear-gradient(135deg, var(--pink) 0%, var(--berry) 100%);
+            padding: 12px 22px;
+            border-radius: 999px;
+            box-shadow: 0 12px 22px rgba(201, 74, 143, 0.35);
+            transition: transform 0.22s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 900px) {
+            .story-section,
+            .story-section.reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .story-image {
+                min-height: 240px;
+            }
+
+            .story-copy {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkles"></div>
+
+    <section class="hero">
+        <div class="hero-card">
+            <span class="badge">She Said Yes!</span>
+            <h1>This is where our story starts 💕</h1>
+            <p>I made this little page for us so we can look back on all the fun moments ahead.</p>
+            <div class="hint">Scroll down for our mini storybook ↓</div>
+        </div>
+    </section>
+
+    <main class="story">
+        <section class="story-section reveal">
+            <img class="story-image" src="https://picsum.photos/seed/date-night/900/700" alt="Placeholder memory 1">
+            <div class="story-copy">
+                <h2>Chapter 1: First Date Energy</h2>
+                <p>Matching smiles. Nervous jokes. A little chaos and a lot of butterflies. This is where the best stories begin.</p>
+            </div>
+        </section>
+
+        <section class="story-section reveal reverse">
+            <div class="story-copy">
+                <h2>Chapter 2: Tiny Adventures</h2>
+                <p>Late-night drives, favorite songs, random snacks, and the kind of laughs that make your face hurt in the best way.</p>
+            </div>
+            <img class="story-image" src="https://picsum.photos/seed/adventure-vibes/900/700" alt="Placeholder memory 2">
+        </section>
+
+        <section class="story-section reveal">
+            <img class="story-image" src="https://picsum.photos/seed/sunset-moment/900/700" alt="Placeholder memory 3">
+            <div class="story-copy">
+                <h2>Chapter 3: Soft Moments</h2>
+                <p>The calm moments are my favorite too. Just us, no rush, no noise, enjoying each other and the little things.</p>
+            </div>
+        </section>
+
+        <section class="story-section reveal reverse">
+            <div class="story-copy">
+                <h2>Chapter 4: More To Come</h2>
+                <p>This is just the beginning. More memories, more photos, more "remember when" moments, and more reasons to smile.</p>
+            </div>
+            <img class="story-image" src="https://picsum.photos/seed/future-us/900/700" alt="Placeholder memory 4">
+        </section>
+    </main>
+
+    <section class="final-note">
+        <h3>To the cutest girlfriend ever ✨</h3>
+        <p>Thanks for saying yes. I cannot wait to keep writing this story with you, one sweet chapter at a time.</p>
+        <a class="back-link" href="index.html">Replay the proposal</a>
+    </section>
+
+    <script>
+        const revealItems = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        revealItems.forEach((item) => observer.observe(item));
+    </script>
+</body>
+</html>
