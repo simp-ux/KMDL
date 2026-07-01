@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will You Be My Girlfriend? 💕</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Nunito:wght@400;600;800&display=swap');
+
+        :root {
+            --pink: #ff5fa2;
+            --rose: #ff8cc6;
+            --berry: #c74b8c;
+            --violet: #764ba2;
+            --indigo: #667eea;
+            --ink: #322645;
+            --card: rgba(255, 255, 255, 0.88);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,13 +25,54 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Nunito', sans-serif;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255, 163, 201, 0.35) 0%, transparent 35%),
+                radial-gradient(circle at 80% 12%, rgba(167, 187, 255, 0.35) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(255, 210, 228, 0.28) 0%, transparent 45%),
+                linear-gradient(130deg, var(--indigo) 0%, var(--violet) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            color: var(--ink);
+        }
+
+        .orb {
+            position: fixed;
+            filter: blur(1px);
+            border-radius: 999px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.9;
+            animation: drift 7s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 260px;
+            height: 260px;
+            left: -70px;
+            top: -55px;
+            background: radial-gradient(circle at 30% 30%, #ffd2ea, #ff74b7);
+        }
+
+        .orb-2 {
+            width: 210px;
+            height: 210px;
+            right: -60px;
+            bottom: -40px;
+            background: radial-gradient(circle at 35% 35%, #dbe2ff, #8b7dff);
+            animation-delay: 1.4s;
+        }
+
+        @keyframes drift {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+            }
+            50% {
+                transform: translateY(-18px) scale(1.05);
+            }
         }
 
         .particles {
@@ -53,14 +106,15 @@
 
         .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--card);
             padding: 70px 50px;
-            border-radius: 25px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            border-radius: 28px;
+            box-shadow: 0 30px 80px rgba(24, 10, 45, 0.35);
             max-width: 550px;
             z-index: 10;
             position: relative;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.45);
             animation: slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
@@ -85,7 +139,7 @@
 
         .message {
             font-size: 1.3em;
-            color: #764ba2;
+            color: var(--violet);
             line-height: 1.8;
             animation: slideMessage 0.6s ease-out forwards;
             text-shadow: 0 2px 10px rgba(118, 75, 162, 0.2);
@@ -131,15 +185,17 @@
         }
 
         h1 {
-            color: #764ba2;
+            color: #59317e;
             font-size: 2.3em;
             margin-bottom: 10px;
             font-weight: 700;
             letter-spacing: -0.5px;
+            font-family: 'Baloo 2', cursive;
+            text-shadow: 0 7px 24px rgba(118, 75, 162, 0.25);
         }
 
         .subtitle {
-            color: #888;
+            color: #6e5d86;
             font-size: 1em;
             margin-bottom: 45px;
             line-height: 1.6;
@@ -194,10 +250,11 @@
         }
 
         .yes-btn {
-            background: linear-gradient(135deg, #ff6b9d 0%, #c74b8c 100%);
+            background: linear-gradient(135deg, var(--pink) 0%, var(--berry) 100%);
             color: white;
             min-width: 140px;
             box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            animation: pulseCta 2s ease-in-out infinite;
         }
 
         .yes-btn:hover {
@@ -207,6 +264,15 @@
 
         .yes-btn:active {
             transform: translateY(-1px);
+        }
+
+        @keyframes pulseCta {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(255, 107, 157, 0.32);
+            }
+            50% {
+                box-shadow: 0 12px 42px rgba(255, 107, 157, 0.52);
+            }
         }
 
         .no-btn {
@@ -221,7 +287,7 @@
         }
 
         .reason {
-            color: #aaa;
+            color: #8a7a9e;
             font-size: 0.9em;
             font-style: italic;
             font-weight: 400;
@@ -231,7 +297,7 @@
             display: none;
             margin-top: 30px;
             padding: 25px;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c74b8c 100%);
+            background: linear-gradient(135deg, var(--pink) 0%, var(--berry) 100%);
             color: white;
             border-radius: 15px;
             font-size: 1.3em;
@@ -294,10 +360,17 @@
                 padding: 14px 35px;
                 font-size: 0.95em;
             }
+
+            .orb-1,
+            .orb-2 {
+                opacity: 0.55;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
     <div class="particles" id="particles"></div>
 
     <div class="container">
@@ -311,7 +384,7 @@
 
         <div class="button-container">
             <button class="yes-btn" onclick="sayYes()">YES! 💕</button>
-            <button class="no-btn" onclick="escapeNo(event)">Nope 😅</button>
+            <button class="no-btn" onclick="escapeNo(event)" onmouseover="escapeNo(event)">Nope 😅</button>
         </div>
 
         <p class="reason">(That button runs away... for fun! 😉)</p>
@@ -344,7 +417,7 @@
         });
 
         function startParticleEffect() {
-            particleInterval = setInterval(createParticle, 500);
+            particleInterval = setInterval(createParticle, 260);
         }
 
         function createParticle() {
@@ -400,6 +473,10 @@
             for (let i = 0; i < 80; i++) {
                 setTimeout(() => createCelebrationBurst(), i * 30);
             }
+
+            for (let i = 0; i < 180; i++) {
+                setTimeout(() => createParticle(), i * 14);
+            }
             
             // Disable buttons
             document.querySelectorAll('button').forEach(btn => {
@@ -434,8 +511,8 @@
 
         function escapeNo(event) {
             const button = event.target;
-            const randomX = (Math.random() - 0.5) * 200;
-            const randomY = (Math.random() - 0.5) * 200;
+            const randomX = (Math.random() - 0.5) * 240;
+            const randomY = (Math.random() - 0.5) * 220;
             const rotation = Math.random() * 360;
             
             button.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${rotation}deg)`;
