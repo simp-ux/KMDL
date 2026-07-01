@@ -111,20 +111,18 @@
             }
         }
 
-        .story {
+        .gallery {
             position: relative;
             z-index: 2;
             width: min(1080px, 92vw);
             margin: 0 auto 120px;
             display: grid;
-            gap: 28px;
+            gap: 22px;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
         }
 
-        .story-section {
-            display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            gap: 24px;
-            align-items: center;
+        .photo-card {
+            grid-column: span 6;
             background: rgba(255, 255, 255, 0.75);
             border: 1px solid rgba(255, 255, 255, 0.85);
             border-radius: 24px;
@@ -135,36 +133,32 @@
             transition: transform 0.65s ease, opacity 0.65s ease;
         }
 
-        .story-section.show {
+        .photo-card.show {
             transform: translateY(0);
             opacity: 1;
         }
 
-        .story-section.reverse {
-            grid-template-columns: 1fr 1.1fr;
+        .photo-card.wide {
+            grid-column: span 12;
         }
 
-        .story-image {
-            height: 100%;
-            min-height: 300px;
+        .photo-card.tall .photo {
+            height: 460px;
+        }
+
+        .photo {
+            height: 340px;
             width: 100%;
             object-fit: cover;
+            display: block;
         }
 
-        .story-copy {
-            padding: 30px;
-        }
-
-        .story-copy h2 {
+        .photo-caption {
+            padding: 18px 20px 20px;
             font-family: 'Baloo 2', cursive;
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
-            margin-bottom: 10px;
+            font-size: clamp(1.1rem, 2.8vw, 1.6rem);
             color: #4b2d72;
-        }
-
-        .story-copy p {
-            line-height: 1.7;
-            font-size: 1.05rem;
+            line-height: 1.3;
         }
 
         .final-note {
@@ -211,17 +205,17 @@
         }
 
         @media (max-width: 900px) {
-            .story-section,
-            .story-section.reverse {
+            .gallery {
                 grid-template-columns: 1fr;
             }
 
-            .story-image {
-                min-height: 240px;
+            .photo-card,
+            .photo-card.wide {
+                grid-column: span 1;
             }
 
-            .story-copy {
-                padding: 24px;
+            .photo {
+                height: 270px;
             }
         }
     </style>
@@ -232,49 +226,47 @@
     <section class="hero">
         <div class="hero-card">
             <span class="badge">She Said Yes!</span>
-            <h1>This is where our story starts 💕</h1>
-            <p>I made this little page for us so we can look back on all the fun moments ahead.</p>
-            <div class="hint">Scroll down for our mini storybook ↓</div>
+            <h1>Just Us, In Photos 💕</h1>
+            <p>A little photo page for our favorite moments together.</p>
+            <div class="hint">Scroll down to see our gallery ↓</div>
         </div>
     </section>
 
-    <main class="story">
-        <section class="story-section reveal">
-            <img class="story-image" src="https://picsum.photos/seed/date-night/900/700" alt="Placeholder memory 1">
-            <div class="story-copy">
-                <h2>Chapter 1: First Date Energy</h2>
-                <p>Matching smiles. Nervous jokes. A little chaos and a lot of butterflies. This is where the best stories begin.</p>
-            </div>
+    <main class="gallery">
+        <section class="photo-card reveal wide">
+            <img class="photo" src="https://picsum.photos/seed/us-main/1400/800" alt="Placeholder photo 1">
+            <p class="photo-caption">Our favorite smile together ✨</p>
         </section>
 
-        <section class="story-section reveal reverse">
-            <div class="story-copy">
-                <h2>Chapter 2: Tiny Adventures</h2>
-                <p>Late-night drives, favorite songs, random snacks, and the kind of laughs that make your face hurt in the best way.</p>
-            </div>
-            <img class="story-image" src="https://picsum.photos/seed/adventure-vibes/900/700" alt="Placeholder memory 2">
+        <section class="photo-card reveal">
+            <img class="photo" src="https://picsum.photos/seed/us-2/900/900" alt="Placeholder photo 2">
+            <p class="photo-caption">This day was so fun 💫</p>
         </section>
 
-        <section class="story-section reveal">
-            <img class="story-image" src="https://picsum.photos/seed/sunset-moment/900/700" alt="Placeholder memory 3">
-            <div class="story-copy">
-                <h2>Chapter 3: Soft Moments</h2>
-                <p>The calm moments are my favorite too. Just us, no rush, no noise, enjoying each other and the little things.</p>
-            </div>
+        <section class="photo-card reveal tall">
+            <img class="photo" src="https://picsum.photos/seed/us-3/900/1200" alt="Placeholder photo 3">
+            <p class="photo-caption">Could look at this one forever 💕</p>
         </section>
 
-        <section class="story-section reveal reverse">
-            <div class="story-copy">
-                <h2>Chapter 4: More To Come</h2>
-                <p>This is just the beginning. More memories, more photos, more "remember when" moments, and more reasons to smile.</p>
-            </div>
-            <img class="story-image" src="https://picsum.photos/seed/future-us/900/700" alt="Placeholder memory 4">
+        <section class="photo-card reveal">
+            <img class="photo" src="https://picsum.photos/seed/us-4/900/900" alt="Placeholder photo 4">
+            <p class="photo-caption">Cutest duo, no debate 🌸</p>
+        </section>
+
+        <section class="photo-card reveal">
+            <img class="photo" src="https://picsum.photos/seed/us-5/900/900" alt="Placeholder photo 5">
+            <p class="photo-caption">Us being us 🤍</p>
+        </section>
+
+        <section class="photo-card reveal wide">
+            <img class="photo" src="https://picsum.photos/seed/us-6/1400/820" alt="Placeholder photo 6">
+            <p class="photo-caption">More memories coming soon...</p>
         </section>
     </main>
 
     <section class="final-note">
         <h3>To the cutest girlfriend ever ✨</h3>
-        <p>Thanks for saying yes. I cannot wait to keep writing this story with you, one sweet chapter at a time.</p>
+        <p>Thanks for saying yes. I cannot wait to fill this page with real photos of us.</p>
         <a class="back-link" href="index.html">Replay the proposal</a>
     </section>
 
