@@ -118,6 +118,55 @@
             animation: slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
+        .container.pre-intro {
+            opacity: 0;
+            transform: translateY(24px) scale(0.96);
+            pointer-events: none;
+            animation: none;
+        }
+
+        .container.reveal {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+            animation: slideIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .intro-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(37, 18, 61, 0.18), rgba(37, 18, 61, 0.08));
+            transition: opacity 0.7s ease;
+        }
+
+        .intro-screen.hidden {
+            opacity: 0;
+        }
+
+        .intro-message {
+            max-width: 850px;
+            font-family: 'Baloo 2', cursive;
+            font-size: clamp(1.8rem, 6vw, 4rem);
+            color: #fff7ff;
+            text-shadow: 0 10px 28px rgba(35, 10, 56, 0.42);
+            line-height: 1.25;
+            opacity: 0;
+            transform: translateY(18px) scale(0.98);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .intro-message.in {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -126,45 +175,6 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
-            }
-        }
-
-        .message-display {
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-
-        .message {
-            font-size: 1.3em;
-            color: var(--violet);
-            line-height: 1.8;
-            animation: slideMessage 0.6s ease-out forwards;
-            text-shadow: 0 2px 10px rgba(118, 75, 162, 0.2);
-            font-weight: 500;
-        }
-
-        @keyframes slideMessage {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(-20px) scale(0.9);
             }
         }
 
@@ -373,14 +383,14 @@
     <div class="orb orb-2"></div>
     <div class="particles" id="particles"></div>
 
-    <div class="container">
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-message" id="introMessage"></div>
+    </div>
+
+    <div class="container pre-intro" id="proposalCard">
         <span class="emoji-main">💕</span>
         <h1>Will You Be My Girlfriend?</h1>
-        <p class="subtitle">I really like you... 🌟</p>
-
-        <div class="message-display" id="messageDisplay">
-            <div class="message">Every moment with you feels special ✨</div>
-        </div>
+        <p class="subtitle">Okay, now the real question... 🌟</p>
 
         <div class="button-container">
             <button class="yes-btn" onclick="sayYes()">YES! 💕</button>
@@ -398,11 +408,10 @@
     <script>
         const messages = [
             "Every moment with you feels special ✨",
-            "You make me smile even on my worst days 😊",
-            "I love the way you laugh 😄",
-            "You're my favorite person 💫",
-            "Life is better with you 🌈",
-            "Will you be my girlfriend? 💕"
+            "You make ordinary days feel magical 🌈",
+            "Your smile is my favorite view 😄",
+            "You are my favorite person, always 💫",
+            "One more thing... 💕"
         ];
 
         const emojis = ['❤️', '💕', '💖', '💝', '✨', '🌟', '🌠', '💫', '💞'];
@@ -413,7 +422,7 @@
         // Start particle animation on load
         window.addEventListener('load', () => {
             startParticleEffect();
-            startMessageSequence();
+            startIntroSequence();
         });
 
         function startParticleEffect() {
@@ -441,26 +450,48 @@
             setTimeout(() => particle.remove(), duration * 1000);
         }
 
-        function startMessageSequence() {
-            const messageDisplay = document.getElementById('messageDisplay');
-            
+        function startIntroSequence() {
+            const introScreen = document.getElementById('introScreen');
+            const introMessage = document.getElementById('introMessage');
+
+            showIntroMessage(messages[currentMessageIndex], introMessage);
+
             const interval = setInterval(() => {
+                currentMessageIndex++;
+
                 if (currentMessageIndex >= messages.length) {
                     clearInterval(interval);
+
+                    setTimeout(() => {
+                        introScreen.classList.add('hidden');
+                        revealProposalCard();
+                    }, 900);
                     return;
                 }
-                
-                const message = messageDisplay.querySelector('.message');
-                message.style.animation = 'fadeOut 0.5s ease-out forwards';
-                
-                setTimeout(() => {
-                    currentMessageIndex++;
-                    if (currentMessageIndex < messages.length) {
-                        message.textContent = messages[currentMessageIndex];
-                        message.style.animation = 'slideMessage 0.6s ease-out forwards';
-                    }
-                }, 500);
-            }, 3500);
+
+                showIntroMessage(messages[currentMessageIndex], introMessage);
+            }, 2300);
+        }
+
+        function showIntroMessage(text, introMessage) {
+            introMessage.classList.remove('in');
+
+            setTimeout(() => {
+                introMessage.textContent = text;
+                introMessage.classList.add('in');
+            }, 280);
+        }
+
+        function revealProposalCard() {
+            const proposalCard = document.getElementById('proposalCard');
+            const introScreen = document.getElementById('introScreen');
+
+            proposalCard.classList.remove('pre-intro');
+            proposalCard.classList.add('reveal');
+
+            setTimeout(() => {
+                introScreen.style.display = 'none';
+            }, 700);
         }
 
         function sayYes() {
