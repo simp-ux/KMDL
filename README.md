@@ -2,6 +2,8 @@
 
 A cute and playful interactive webpage to ask someone special to be your girlfriend!
 
+**Live Demo:** https://simp-ux.github.io/KMDL/
+
 ## Features
 
 - ✨ Beautiful gradient background with smooth animations
