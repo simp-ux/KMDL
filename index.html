@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Girlfriend? 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(118, 75, 162, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(118, 75, 162, 0.8);
+            }
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-width: 120px;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.4);
+        }
+
+        .no-btn {
+            background: #f0f0f0;
+            color: #764ba2;
+            min-width: 120px;
+            position: relative;
+        }
+
+        .no-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .no-btn.escaping {
+            animation: escape 0.5s ease-out;
+        }
+
+        @keyframes escape {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(100px, -50px) rotate(45deg);
+            }
+            100% {
+                transform: translate(-100px, 50px) rotate(-45deg);
+            }
+        }
+
+        .hearts {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff6b6b;
+            animation: rise 3s ease-in forwards;
+        }
+
+        @keyframes rise {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-500px) translateX(100px) scale(0.5);
+            }
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 10px;
+            font-size: 1.2em;
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .reason {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">💕</div>
+        <h1>Will You Be My Girlfriend?</h1>
+        <p class="subtitle">
+            Life is better with you. Let's make amazing memories together! 🌟
+        </p>
+        
+        <div class="button-container">
+            <button class="yes-btn" onclick="sayYes()">Yes! 💖</button>
+            <button class="no-btn" onclick="escapeNo(event)">No 😅</button>
+        </div>
+
+        <p class="reason">(The 'No' button is just for fun... you'll want to click 'Yes'!)</p>
+
+        <div class="success-message" id="successMessage">
+            🎉 OMG YES! You've made me the happiest person ever! 🎉<br>
+            <span style="font-size: 0.8em; margin-top: 10px; display: block;">Let's celebrate! 💕✨</span>
+        </div>
+    </div>
+
+    <script>
+        function sayYes() {
+            const message = document.getElementById('successMessage');
+            message.classList.add('show');
+
+            // Create confetti hearts
+            for (let i = 0; i < 30; i++) {
+                createHeart();
+            }
+
+            // Disable buttons after clicking yes
+            document.querySelectorAll('button').forEach(btn => {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+            });
+
+            // Optional: Play a celebration animation
+            document.querySelector('.container').style.animation = 'bounce 0.6s ease';
+        }
+
+        function escapeNo(event) {
+            const button = event.target;
+            
+            // Random position for the button to escape to
+            const randomX = (Math.random() - 0.5) * 300;
+            const randomY = (Math.random() - 0.5) * 300;
+            
+            button.style.position = 'fixed';
+            button.style.left = (button.offsetLeft + randomX) + 'px';
+            button.style.top = (button.offsetTop + randomY) + 'px';
+            
+            // Optional: Reset position after animation
+            setTimeout(() => {
+                button.style.position = '';
+                button.style.left = '';
+                button.style.top = '';
+            }, 500);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = window.innerHeight + 'px';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 3000);
+        }
+
+        // Add some ambient hearts on page load
+        window.addEventListener('load', () => {
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => createHeart(), i * 500);
+            }
+        });
+    </script>
+</body>
+</html>
